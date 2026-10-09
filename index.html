@@ -1,1137 +1,690 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Netmebro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
 
 <style>
-/* =========================================
-   NETMEBRO — Layout: full-width sections, crisp white layers
-   Color: pure white x light grey x calm slate-blue accent
-   Type: Playfair Display (brand/display) + DM Sans (body/UI)
-   ========================================= */
+/* ==============================================
+   Netmebro — AI × Human unified service platform
+   Dark-first | Space Grotesk (display) + Inter (body)
+   Token palette: --ai blue, --human violet, --impact amber
+   ============================================== */
 
 :root {
-  --bg:         #FFFFFF;
-  --bg-soft:    #F7F8FA;
-  --bg-card:    #FFFFFF;
-  --fg:         #111827;
-  --fg-mid:     #4B5563;
-  --fg-muted:   #9CA3AF;
-  --accent:     #3B6FD4;
-  --accent-2:   #6090E8;
-  --accent-warm:#F59E42;
-  --accent-pale:#EEF3FD;
-  --border:     #E5E7EB;
-  --shadow:     rgba(17,24,39,0.06);
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body:    'DM Sans', system-ui, sans-serif;
-  --font-mono:    'DM Mono', monospace;
-  color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg:         #0F1117;
-    --bg-soft:    #161A24;
-    --bg-card:    #1C2130;
-    --fg:         #F1F5F9;
-    --fg-mid:     #94A3B8;
-    --fg-muted:   #64748B;
-    --accent:     #5B8FF0;
-    --accent-2:   #7AABFF;
-    --accent-warm:#FBBF5A;
-    --accent-pale:#1A2540;
-    --border:     #2A3347;
-    --shadow:     rgba(0,0,0,0.3);
-    color-scheme: dark;
-  }
-}
-
-:root[data-theme="dark"] {
-  --bg:         #0F1117;
-  --bg-soft:    #161A24;
-  --bg-card:    #1C2130;
-  --fg:         #F1F5F9;
-  --fg-mid:     #94A3B8;
-  --fg-muted:   #64748B;
-  --accent:     #5B8FF0;
-  --accent-2:   #7AABFF;
-  --accent-warm:#FBBF5A;
-  --accent-pale:#1A2540;
-  --border:     #2A3347;
-  --shadow:     rgba(0,0,0,0.3);
+  --base:        #070C1A;
+  --surface:     #0D1529;
+  --panel:       #111E38;
+  --ai:          #2B7FFF;
+  --ai-dim:      rgba(43,127,255,0.1);
+  --ai-glow:     rgba(43,127,255,0.28);
+  --human:       #9B5CF6;
+  --human-dim:   rgba(155,92,246,0.1);
+  --impact:      #F59E0B;
+  --impact-dim:  rgba(245,158,11,0.1);
+  --fg:          #EEF2FF;
+  --fg-mid:      #7A8EC4;
+  --fg-dim:      #3A4F78;
+  --border:      rgba(255,255,255,0.07);
+  --border-ai:   rgba(43,127,255,0.22);
+  --font-d:      'Space Grotesk', system-ui, sans-serif;
+  --font-b:      'Inter', system-ui, sans-serif;
   color-scheme: dark;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.65;
-  padding-inline: 0;
-  overflow-x: hidden;
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --base:       #FFFFFF;
+    --surface:    #F4F7FF;
+    --panel:      #FFFFFF;
+    --ai:         #1A6AFF;
+    --ai-dim:     rgba(26,106,255,0.07);
+    --ai-glow:    rgba(26,106,255,0.18);
+    --human:      #7C3AED;
+    --human-dim:  rgba(124,58,237,0.07);
+    --impact:     #D97706;
+    --impact-dim: rgba(217,119,6,0.09);
+    --fg:         #050A1A;
+    --fg-mid:     #4A5C8A;
+    --fg-dim:     #8A9CC4;
+    --border:     rgba(0,0,0,0.07);
+    --border-ai:  rgba(26,106,255,0.18);
+    color-scheme: light;
+  }
 }
+:root[data-theme="light"] {
+  --base:       #FFFFFF;
+  --surface:    #F4F7FF;
+  --panel:      #FFFFFF;
+  --ai:         #1A6AFF;
+  --ai-dim:     rgba(26,106,255,0.07);
+  --ai-glow:    rgba(26,106,255,0.18);
+  --human:      #7C3AED;
+  --human-dim:  rgba(124,58,237,0.07);
+  --impact:     #D97706;
+  --impact-dim: rgba(217,119,6,0.09);
+  --fg:         #050A1A;
+  --fg-mid:     #4A5C8A;
+  --fg-dim:     #8A9CC4;
+  --border:     rgba(0,0,0,0.07);
+  --border-ai:  rgba(26,106,255,0.18);
+  color-scheme: light;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--base);color:var(--fg);
+  font-family:var(--font-b);font-size:16px;line-height:1.65;
+  overflow-x:hidden;
+}
+
+.wrap{max-width:1120px;margin:0 auto;padding-inline:clamp(16px,5vw,60px)}
 
 /* ── NAV ── */
-nav {
-  position: sticky;
-  top: env(safe-area-inset-top, 0px);
-  z-index: 100;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  padding: 0 clamp(16px, 5vw, 80px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
-  transition: box-shadow 0.3s ease;
+nav{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:200;
+  background:var(--base);border-bottom:1px solid var(--border);
+  padding:0 clamp(16px,5vw,60px);
+  display:flex;align-items:center;justify-content:space-between;height:60px;
+  transition:border-color .3s,backdrop-filter .3s;
 }
-
-nav.scrolled {
-  box-shadow: 0 2px 24px var(--shadow);
+nav.scrolled{
+  border-color:var(--border-ai);
+  backdrop-filter:blur(14px);
+  background:color-mix(in srgb,var(--base) 88%,transparent);
 }
-
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo{
+  width:32px;height:32px;background:var(--ai);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
-
-.nav-logo {
-  width: 36px;
-  height: 36px;
-  background: var(--accent);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+.brand-name{font-family:var(--font-d);font-size:1.2rem;font-weight:700;color:var(--fg);letter-spacing:-.02em}
+.brand-name em{color:var(--ai);font-style:normal}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--fg-mid);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--fg)}
+.nav-cta{
+  background:var(--ai-dim) !important;border:1px solid var(--border-ai) !important;
+  color:var(--ai) !important;padding:7px 18px;border-radius:8px;
+  font-weight:600 !important;transition:background .2s,color .2s !important;
 }
-
-.nav-logo svg { width: 20px; height: 20px; }
-
-.brand-name {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--fg);
-  letter-spacing: -0.02em;
-}
-
-.brand-name span { color: var(--accent); }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  list-style: none;
-}
-
-.nav-links a {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--fg-mid);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--accent); }
-
-.nav-cta {
-  background: var(--accent);
-  color: #fff !important;
-  padding: 8px 20px;
-  border-radius: 100px;
-  font-size: 0.875rem !important;
-  font-weight: 600 !important;
-  transition: background 0.2s, transform 0.15s !important;
-}
-.nav-cta:hover { background: var(--accent-2) !important; transform: translateY(-1px); }
-
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  color: var(--fg);
-}
-
-@media (max-width: 720px) {
-  .nav-links { display: none; }
-  .nav-toggle { display: flex; align-items: center; }
-  .nav-links.open {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 64px;
-    left: 0; right: 0;
-    background: var(--bg-card);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 24px;
-    gap: 16px;
-    align-items: flex-start;
+.nav-cta:hover{background:var(--ai) !important;color:#fff !important}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--fg)}
+@media(max-width:720px){
+  .nav-links{display:none}
+  .nav-toggle{display:flex;align-items:center}
+  .nav-links.open{
+    display:flex;flex-direction:column;
+    position:absolute;top:60px;left:0;right:0;
+    background:var(--surface);border-bottom:1px solid var(--border);
+    padding:20px 24px;gap:16px;align-items:flex-start;
   }
 }
 
-/* ── WRAPPER ── */
-.wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding-inline: clamp(16px, 5vw, 60px);
-}
-
 /* ── HERO ── */
-.hero {
-  background: var(--bg);
-  padding-block: clamp(60px, 10vw, 120px);
-  position: relative;
-  overflow: hidden;
+.hero{
+  background:var(--base);
+  padding-block:clamp(68px,10vw,128px) clamp(52px,8vw,108px);
+  position:relative;overflow:hidden;
 }
+.glow-blob{
+  position:absolute;border-radius:50%;filter:blur(110px);pointer-events:none;
+}
+.glow-1{width:560px;height:560px;background:var(--ai-glow);top:-180px;right:-60px;opacity:.3}
+.glow-2{width:480px;height:480px;background:rgba(155,92,246,.18);bottom:-160px;left:-80px;opacity:.25}
+.hero-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(40px,6vw,80px);align-items:center;position:relative;z-index:1;
+}
+@media(max-width:768px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-canvas-wrap{display:none}
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--border-ai);background:var(--ai-dim);
+  padding:6px 14px;border-radius:100px;margin-bottom:28px;
+}
+.badge-dot{
+  width:7px;height:7px;background:var(--ai);border-radius:50%;
+  animation:blink 2s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 var(--ai-glow)}50%{opacity:.6;box-shadow:0 0 0 6px transparent}}
+.badge-text{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ai)}
 
-.hero-bg-shape {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.35;
+h1.hero-h{
+  font-family:var(--font-d);
+  font-size:clamp(2.8rem,5.5vw,4.8rem);
+  font-weight:700;line-height:1.04;letter-spacing:-.04em;
+  text-wrap:balance;color:var(--fg);margin-bottom:24px;
 }
+.ai-w{color:var(--ai)}
+.hu-w{color:var(--human)}
+.hero-desc{font-size:1.05rem;line-height:1.75;color:var(--fg-mid);max-width:480px;margin-bottom:36px}
+.hero-acts{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 
-.hero-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, 5vw, 80px);
-  align-items: center;
-  position: relative;
-  z-index: 1;
+.btn-p{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--ai);color:#fff;
+  font-family:var(--font-b);font-size:.9rem;font-weight:600;
+  padding:13px 26px;border-radius:8px;
+  text-decoration:none;border:none;cursor:pointer;
+  box-shadow:0 4px 24px var(--ai-glow);
+  transition:background .2s,transform .15s,box-shadow .2s;
 }
+.btn-p:hover{background:#5090FF;transform:translateY(-1px);box-shadow:0 8px 32px var(--ai-glow)}
+.btn-o{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--fg-mid);
+  font-family:var(--font-b);font-size:.9rem;font-weight:500;
+  padding:13px 26px;border-radius:8px;
+  text-decoration:none;border:1px solid var(--border);cursor:pointer;
+  transition:border-color .2s,color .2s;
+}
+.btn-o:hover{border-color:var(--border-ai);color:var(--ai)}
 
-@media (max-width: 720px) {
-  .hero-inner { grid-template-columns: 1fr; }
-  .hero-visual { display: none; }
-}
+.hero-canvas-wrap{display:flex;align-items:center;justify-content:center}
+#hero-canvas{display:block;width:100%;max-width:460px;border-radius:12px}
 
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--accent-pale);
-  color: var(--accent);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 6px 14px;
-  border-radius: 100px;
-  margin-bottom: 24px;
+/* ── STATS STRIP ── */
+.stats-strip{
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:var(--surface);padding-block:32px;
 }
+.stats-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
+}
+@media(max-width:600px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+.stat-block{text-align:center}
+.stat-num{
+  font-family:var(--font-d);font-size:2.4rem;font-weight:700;
+  color:var(--fg);line-height:1;letter-spacing:-.04em;
+}
+.stat-cap{font-size:.75rem;color:var(--fg-dim);font-weight:500;margin-top:6px;letter-spacing:.03em}
 
-.hero-eyebrow::before {
-  content: '';
-  width: 6px; height: 6px;
-  background: var(--accent);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
+/* ── SECTION ATOMS ── */
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.sec-h{
+  font-family:var(--font-d);
+  font-size:clamp(1.9rem,3.8vw,3rem);
+  font-weight:700;line-height:1.08;letter-spacing:-.03em;
+  text-wrap:balance;color:var(--fg);
 }
+.sec-sub{font-size:1rem;line-height:1.75;color:var(--fg-mid);max-width:520px;margin-top:14px}
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.7); }
+/* ── VISION ── */
+.vision{background:var(--base);padding-block:clamp(72px,10vw,120px)}
+.vision-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(48px,7vw,96px);align-items:start;
 }
+@media(max-width:768px){.vision-inner{grid-template-columns:1fr}}
+.vision-ql{
+  font-family:var(--font-d);
+  font-size:clamp(1.5rem,3vw,2.1rem);
+  font-weight:600;line-height:1.28;letter-spacing:-.025em;
+  color:var(--fg);text-wrap:balance;margin-bottom:20px;
+}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.chip{
+  border:1px solid var(--border);color:var(--fg-mid);
+  font-size:.78rem;font-weight:500;padding:5px 13px;border-radius:100px;
+  transition:border-color .2s,color .2s;
+}
+.chip:hover{border-color:var(--border-ai);color:var(--fg)}
+.chip.ai{border-color:var(--border-ai);color:var(--ai);background:var(--ai-dim)}
+.chip.hu{border-color:rgba(155,92,246,.25);color:var(--human);background:var(--human-dim)}
+.chip.im{border-color:rgba(245,158,11,.25);color:var(--impact);background:var(--impact-dim)}
 
-.hero h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 3.8rem);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-  margin-bottom: 24px;
-  color: var(--fg);
+.v-feats{display:flex;flex-direction:column;gap:20px}
+.v-feat{
+  border:1px solid var(--border);background:var(--surface);
+  border-radius:12px;padding:22px 20px;
+  display:flex;gap:16px;align-items:flex-start;
+  transition:border-color .2s;
 }
+.v-feat:hover{border-color:var(--border-ai)}
+.v-ico{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.v-ico.ai{background:var(--ai-dim);color:var(--ai)}
+.v-ico.hu{background:var(--human-dim);color:var(--human)}
+.v-ico.im{background:var(--impact-dim);color:var(--impact)}
+.v-ft{font-family:var(--font-d);font-size:.9rem;font-weight:600;color:var(--fg);margin-bottom:4px}
+.v-fd{font-size:.82rem;color:var(--fg-mid);line-height:1.6}
 
-.hero h1 em {
-  font-style: normal;
-  color: var(--accent);
+/* ── SECTORS ── */
+.sectors{
+  background:var(--surface);
+  padding-block:clamp(64px,9vw,110px);
+  border-top:1px solid var(--border);
 }
+.sectors-head{margin-bottom:48px}
+.sect-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;background:var(--border);
+  border:1px solid var(--border);border-radius:16px;overflow:hidden;
+}
+@media(max-width:720px){.sect-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:440px){.sect-grid{grid-template-columns:1fr}}
+.sect-cell{
+  background:var(--surface);padding:26px 22px;
+  transition:background .2s;cursor:default;
+}
+.sect-cell:hover{background:var(--panel)}
+.sect-ico{width:34px;height:34px;color:var(--ai);margin-bottom:12px}
+.sect-name{font-family:var(--font-d);font-size:.92rem;font-weight:600;color:var(--fg);margin-bottom:4px}
+.sect-desc{font-size:.78rem;color:var(--fg-dim);line-height:1.55}
 
-.hero-sub {
-  font-size: 1.1rem;
-  color: var(--fg-mid);
-  line-height: 1.7;
-  max-width: 480px;
-  margin-bottom: 36px;
+/* ── DUALITY ── */
+.duality{
+  background:var(--base);
+  padding-block:clamp(64px,9vw,120px);
+  border-top:1px solid var(--border);
 }
+.dual-split{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2px;margin-top:48px;
+  border-radius:16px;overflow:hidden;border:1px solid var(--border);
+}
+@media(max-width:640px){.dual-split{grid-template-columns:1fr}}
+.dual-side{padding:clamp(28px,4vw,48px)}
+.ai-side{background:linear-gradient(140deg,var(--panel),#0A1830)}
+.hu-side{background:linear-gradient(140deg,var(--panel),#100A28)}
+@media(min-width:641px){.ai-side{border-right:1px solid var(--border)}}
+.dual-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 12px;border-radius:100px;margin-bottom:18px;
+}
+.dual-tag.ai{background:var(--ai-dim);color:var(--ai);border:1px solid var(--border-ai)}
+.dual-tag.hu{background:var(--human-dim);color:var(--human);border:1px solid rgba(155,92,246,.25)}
+.dual-h{
+  font-family:var(--font-d);font-size:clamp(1.25rem,2.5vw,1.65rem);
+  font-weight:700;letter-spacing:-.025em;color:var(--fg);
+  margin-bottom:12px;line-height:1.2;
+}
+.dual-d{font-size:.875rem;color:var(--fg-mid);line-height:1.7;margin-bottom:22px}
+.dual-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+.dual-list li{
+  font-size:.845rem;color:var(--fg-mid);
+  display:flex;align-items:center;gap:10px;
+}
+.dual-list li::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.ai-side .dual-list li::before{background:var(--ai)}
+.hu-side .dual-list li::before{background:var(--human)}
 
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
+/* ── COMMUNICATION ── */
+.comms{
+  background:var(--surface);
+  padding-block:clamp(64px,9vw,110px);
+  border-top:1px solid var(--border);
 }
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--accent);
-  color: #fff;
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 14px 28px;
-  border-radius: 100px;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  box-shadow: 0 4px 16px rgba(59,111,212,0.22);
+.comms-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:20px;margin-top:48px;
 }
-.btn-primary:hover { background: var(--accent-2); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(59,111,212,0.32); }
-
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--fg-mid);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 12px 4px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  transition: color 0.2s;
+@media(max-width:640px){.comms-grid{grid-template-columns:1fr}}
+.ch-card{
+  background:var(--panel);border:1px solid var(--border);
+  border-radius:16px;padding:30px 26px;
+  transition:border-color .2s,transform .2s;
 }
-.btn-ghost:hover { color: var(--accent); }
-.btn-ghost svg { transition: transform 0.2s; }
-.btn-ghost:hover svg { transform: translateX(3px); }
-
-/* hero visual */
-.hero-visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.ch-card:hover{border-color:var(--border-ai);transform:translateY(-2px)}
+.ch-ico{
+  width:46px;height:46px;background:var(--ai-dim);border-radius:11px;
+  display:flex;align-items:center;justify-content:center;color:var(--ai);
+  margin-bottom:16px;
 }
-
-.hero-card-stack {
-  position: relative;
-  width: 320px;
-  height: 320px;
+.ch-name{font-family:var(--font-d);font-size:1.05rem;font-weight:600;color:var(--fg);margin-bottom:8px}
+.ch-desc{font-size:.845rem;color:var(--fg-mid);line-height:1.65}
+.ch-live{
+  display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+  font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ai);
 }
-
-.h-card {
-  position: absolute;
-  background: var(--bg-card);
-  border-radius: 20px;
-  box-shadow: 0 8px 40px var(--shadow);
-  border: 1px solid var(--border);
-  padding: 20px 24px;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-.h-card-1 {
-  width: 220px;
-  top: 20px; left: 30px;
-  animation: float1 4s infinite;
-}
-
-.h-card-2 {
-  width: 200px;
-  bottom: 30px; right: 10px;
-  animation: float2 5s 0.8s infinite;
-}
-
-.h-card-3 {
-  width: 160px;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  animation: float3 4.5s 0.4s infinite;
-}
-
-@keyframes float1 {
-  from { transform: translateY(0px) rotate(-2deg); }
-  to   { transform: translateY(-12px) rotate(-1deg); }
-}
-@keyframes float2 {
-  from { transform: translateY(0px) rotate(2deg); }
-  to   { transform: translateY(-10px) rotate(1.5deg); }
-}
-@keyframes float3 {
-  from { transform: translate(-50%,-50%) rotate(0deg); }
-  to   { transform: translate(-50%,-60%) rotate(1deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .h-card { animation: none; }
-}
-
-.h-card-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  margin-bottom: 8px;
-}
-
-.h-card-title {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--fg);
-  margin-bottom: 10px;
-}
-
-.h-card-chip {
-  display: inline-block;
-  background: var(--accent-pale);
-  color: var(--accent);
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 100px;
-}
-
-.h-card-chip-warm {
-  background: #FEF3E2;
-  color: #B45309;
-}
-
-.h-card-amt {
-  font-family: var(--font-mono);
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: var(--accent);
-  margin: 6px 0 4px;
-  font-variant-numeric: tabular-nums;
-}
-
-/* ── STATS ── */
-.stats-bar {
-  background: var(--accent);
-  padding-block: 28px;
-}
-
-.stats-row {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 24px;
-}
-
-.stat-item {
-  text-align: center;
-}
-
-.stat-num {
-  font-family: var(--font-display);
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.75);
-  font-weight: 500;
-  margin-top: 4px;
-  letter-spacing: 0.03em;
-}
-
-/* ── SECTION HEADINGS ── */
-.section-eyebrow {
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-
-.section-heading {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
-  text-wrap: balance;
-  color: var(--fg);
-  margin-bottom: 16px;
-}
-
-.section-sub {
-  font-size: 1.05rem;
-  color: var(--fg-mid);
-  line-height: 1.7;
-  max-width: 540px;
-}
-
-/* ── SERVICES ── */
-.services {
-  padding-block: clamp(60px, 9vw, 110px);
-  background: var(--bg);
-}
-
-.services-header {
-  margin-bottom: 56px;
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  gap: 24px;
-}
-
-.service-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 32px 28px;
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-  cursor: default;
-}
-
-.service-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px var(--shadow);
-  border-color: var(--accent);
-}
-
-.service-icon {
-  width: 52px;
-  height: 52px;
-  background: var(--accent-pale);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  color: var(--accent);
-}
-
-.service-icon svg { width: 26px; height: 26px; }
-
-.service-title {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--fg);
-  margin-bottom: 10px;
-}
-
-.service-desc {
-  font-size: 0.9rem;
-  color: var(--fg-mid);
-  line-height: 1.65;
-}
-
-.service-tag {
-  display: inline-block;
-  margin-top: 16px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--accent);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
+.live-dot{width:5px;height:5px;background:#22C55E;border-radius:50%;animation:blink 2s infinite}
 
 /* ── IMPACT ── */
-.impact {
-  background: var(--bg-soft);
-  padding-block: clamp(60px, 9vw, 110px);
+.impact{
+  background:var(--base);
+  padding-block:clamp(64px,9vw,120px);
+  border-top:1px solid var(--border);
 }
-
-.impact-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(40px, 6vw, 100px);
-  align-items: center;
+.impact-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(48px,7vw,96px);align-items:center;
 }
-
-@media (max-width: 720px) {
-  .impact-inner { grid-template-columns: 1fr; }
+@media(max-width:720px){.impact-inner{grid-template-columns:1fr}}
+.big-pct{
+  font-family:var(--font-d);
+  font-size:clamp(5rem,12vw,9rem);
+  font-weight:700;line-height:1;letter-spacing:-.05em;color:var(--impact);
 }
-
-.impact-visual {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 36px;
-  box-shadow: 0 4px 32px var(--shadow);
-}
-
-.impact-ring-label {
-  text-align: center;
-  margin-bottom: 28px;
-}
-
-.impact-ring-label p {
-  font-size: 0.8rem;
-  color: var(--fg-muted);
-  margin-top: 6px;
-}
-
-.impact-ring-label strong {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  color: var(--fg);
-}
-
-.donut-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 28px;
-}
-
-.impact-legend {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.legend-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.legend-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.875rem;
-  color: var(--fg-mid);
-}
-
-.legend-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.legend-pct {
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--fg);
-  font-variant-numeric: tabular-nums;
-}
-
-/* ── HOW IT WORKS ── */
-.how {
-  background: var(--bg);
-  padding-block: clamp(60px, 9vw, 110px);
-}
-
-.how-steps {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
-  gap: 16px;
-  margin-top: 56px;
-  counter-reset: steps;
-}
-
-.how-step {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 32px 24px;
-  position: relative;
-  overflow: hidden;
-}
-
-.how-step::before {
-  counter-increment: steps;
-  content: counter(steps, decimal-leading-zero);
-  position: absolute;
-  top: 16px; right: 20px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--border);
-  font-weight: 600;
-  letter-spacing: 0.05em;
-}
-
-.step-icon {
-  width: 48px; height: 48px;
-  background: var(--accent-pale);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-  margin-bottom: 18px;
-}
-
-.step-title {
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--fg);
-  margin-bottom: 10px;
-}
-
-.step-desc {
-  font-size: 0.875rem;
-  color: var(--fg-mid);
-  line-height: 1.65;
-}
+.streams{display:flex;flex-direction:column;gap:14px;margin-top:32px}
+.stream{display:flex;align-items:center;gap:12px}
+.s-label{font-size:.78rem;color:var(--fg-mid);width:120px;flex-shrink:0}
+.s-bar{flex:1;height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.s-fill{height:100%;border-radius:2px}
+.s-pct{font-size:.78rem;font-weight:700;width:32px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
 
 /* ── MISSION ── */
-.mission {
-  background: #111827;
-  padding-block: clamp(64px, 10vw, 120px);
-  position: relative;
-  overflow: hidden;
+.mission{
+  background:var(--surface);
+  padding-block:clamp(64px,9vw,120px);
+  border-top:1px solid var(--border);
+}
+.mission-inner{max-width:700px}
+.mission-stmt{
+  font-family:var(--font-d);
+  font-size:clamp(1.6rem,3.5vw,2.6rem);
+  font-weight:700;line-height:1.18;letter-spacing:-.03em;
+  color:var(--fg);text-wrap:balance;margin-bottom:24px;
 }
 
-.mission-bg {
-  position: absolute;
-  inset: 0;
-  opacity: 0.05;
-  pointer-events: none;
+/* ── NOTIFY ── */
+.notify{
+  background:var(--panel);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding-block:clamp(56px,8vw,100px);
 }
-
-.mission-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 720px;
+.notify-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(40px,6vw,80px);align-items:center;
 }
-
-.mission .section-eyebrow { color: var(--accent-2); }
-
-.mission .section-heading {
-  color: #fff;
-  font-size: clamp(2rem, 4vw, 3.2rem);
+@media(max-width:720px){.notify-inner{grid-template-columns:1fr}}
+.nf-wrap{display:flex;flex-direction:column;gap:10px}
+.field{
+  background:var(--surface);border:1.5px solid var(--border);color:var(--fg);
+  font-family:var(--font-b);font-size:.9rem;
+  padding:13px 16px;border-radius:8px;width:100%;
+  transition:border-color .2s;outline:none;
 }
-
-.mission-quote {
-  font-family: var(--font-display);
-  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
-  color: rgba(255,255,255,0.6);
-  font-style: italic;
-  line-height: 1.5;
-  margin-block: 32px;
-  padding-left: 24px;
-  border-left: 3px solid var(--accent-2);
+.field:focus{border-color:var(--ai)}
+.field::placeholder{color:var(--fg-dim)}
+.nf-note{font-size:.74rem;color:var(--fg-dim)}
+.form-ok{
+  display:none;background:var(--ai-dim);color:var(--ai);
+  border:1px solid var(--border-ai);
+  padding:14px 18px;border-radius:8px;font-size:.875rem;
 }
-
-.mission-pillars {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 36px;
-}
-
-.pillar-chip {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.8);
-  font-size: 0.85rem;
-  font-weight: 500;
-  padding: 8px 18px;
-  border-radius: 100px;
-}
-
-/* ── LAUNCH BANNER ── */
-.launch {
-  background: var(--bg-soft);
-  padding-block: clamp(50px, 7vw, 90px);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.launch-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, 5vw, 80px);
-  align-items: center;
-}
-
-@media (max-width: 720px) {
-  .launch-inner { grid-template-columns: 1fr; }
-}
-
-.launch-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #FEF3E2;
-  color: #92400E;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 6px 16px;
-  border-radius: 100px;
-  margin-bottom: 20px;
-}
-
-.notify-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.notify-field {
-  background: var(--bg-card);
-  border: 1.5px solid var(--border);
-  color: var(--fg);
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  padding: 14px 18px;
-  border-radius: 12px;
-  width: 100%;
-  transition: border-color 0.2s;
-  outline: none;
-}
-.notify-field:focus { border-color: var(--accent); }
-.notify-field::placeholder { color: var(--fg-muted); }
-
-.notify-note {
-  font-size: 0.78rem;
-  color: var(--fg-muted);
-}
-
-.form-success {
-  display: none;
-  background: var(--accent-pale);
-  color: var(--accent);
-  padding: 14px 18px;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-/* ── CONTRIBUTE ── */
-.contribute {
-  background: var(--bg);
-  padding-block: clamp(60px, 9vw, 110px);
-}
-
-.contribute-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 48px;
-}
-
-@media (max-width: 600px) {
-  .contribute-cards { grid-template-columns: 1fr; }
-}
-
-.contribute-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 36px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.cc-icon {
-  width: 52px; height: 52px;
-  background: var(--accent-pale);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-}
-
-.cc-title {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--fg);
-}
-
-.cc-desc {
-  font-size: 0.9rem;
-  color: var(--fg-mid);
-  line-height: 1.65;
-  flex: 1;
-}
-
-.cc-email {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--accent);
-  background: var(--accent-pale);
-  padding: 8px 14px;
-  border-radius: 8px;
-  user-select: all;
-  width: fit-content;
-}
-
-.copy-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: none;
-  border: 1.5px solid var(--border);
-  color: var(--fg-mid);
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 7px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
-  width: fit-content;
-}
-.copy-btn:hover { border-color: var(--accent); color: var(--accent); }
-.copy-btn.copied { border-color: var(--accent); color: var(--accent); }
 
 /* ── FOOTER ── */
-footer {
-  background: var(--bg-soft);
-  border-top: 1px solid var(--border);
-  padding-block: 40px;
-}
+footer{background:var(--base);border-top:1px solid var(--border);padding-block:40px}
+.foot-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
+.foot-brand{font-family:var(--font-d);font-size:1.1rem;font-weight:700;color:var(--fg);letter-spacing:-.02em}
+.foot-brand em{color:var(--ai);font-style:normal}
+.foot-note{font-size:.76rem;color:var(--fg-dim);margin-top:4px}
+.foot-links{display:flex;gap:22px;list-style:none}
+.foot-links a{font-size:.78rem;color:var(--fg-dim);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--ai)}
+.foot-tag{font-size:.78rem;color:var(--fg-dim);font-style:italic}
 
-.footer-inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
+:focus-visible{outline:2px solid var(--ai);outline-offset:3px;border-radius:4px}
 
-.footer-brand {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--fg);
-}
-
-.footer-brand span { color: var(--accent); }
-
-.footer-note {
-  font-size: 0.82rem;
-  color: var(--fg-muted);
-}
-
-.footer-links {
-  display: flex;
-  gap: 24px;
-  list-style: none;
-}
-
-.footer-links a {
-  font-size: 0.82rem;
-  color: var(--fg-muted);
-  text-decoration: none;
-}
-.footer-links a:hover { color: var(--accent); }
-
-.tagline-footer {
-  font-size: 0.85rem;
-  color: var(--fg-muted);
-  font-style: italic;
-}
-
-/* ── DIVIDER ── */
-.divider {
-  height: 1px;
-  background: var(--border);
-  margin: 0;
-}
-
-/* ── FOCUS ── */
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+/* Entrance */
+.fu{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+.fu.vis{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.fu{opacity:1;transform:none;transition:none}}
 </style>
 
 <!-- NAV -->
-<nav id="main-nav">
+<nav id="nav">
   <a href="#" class="nav-brand">
     <div class="nav-logo">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+      <svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8.5 1.5L1.5 5l7 3.5 7-3.5L8.5 1.5z"/>
+        <path d="M1.5 11.5l7 3.5 7-3.5"/>
+        <path d="M1.5 8.5l7 3.5 7-3.5"/>
       </svg>
     </div>
-    <span class="brand-name">netme<span>bro</span></span>
+    <span class="brand-name">netme<em>bro</em></span>
   </a>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#impact">Our Impact</a></li>
+  <ul class="nav-links" id="nl">
+    <li><a href="#sectors">Services</a></li>
+    <li><a href="#duality">AI + Human</a></li>
+    <li><a href="#impact">Impact</a></li>
     <li><a href="#mission">Mission</a></li>
-    <li><a href="#contribute">Contribute</a></li>
     <li><a href="mailto:admin@netmebro.in" class="nav-cta">Get in Touch</a></li>
   </ul>
-  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-      <line x1="3" y1="6" x2="19" y2="6"/><line x1="3" y1="11" x2="19" y2="11"/><line x1="3" y1="16" x2="19" y2="16"/>
+  <button class="nav-toggle" id="nt" aria-label="Toggle navigation">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
     </svg>
   </button>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <svg class="hero-bg-shape" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <radialGradient id="g1" cx="20%" cy="40%">
-        <stop offset="0%" stop-color="#3B6FD4" stop-opacity="0.1"/>
-        <stop offset="100%" stop-color="#3B6FD4" stop-opacity="0"/>
-      </radialGradient>
-      <radialGradient id="g2" cx="80%" cy="60%">
-        <stop offset="0%" stop-color="#6090E8" stop-opacity="0.07"/>
-        <stop offset="100%" stop-color="#6BAE8A" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-    <rect width="1200" height="600" fill="url(#g1)"/>
-    <rect width="1200" height="600" fill="url(#g2)"/>
-  </svg>
+<section class="hero" id="home">
+  <div class="glow-blob glow-1"></div>
+  <div class="glow-blob glow-2"></div>
   <div class="wrap hero-inner">
-    <div class="hero-text">
-      <div class="hero-eyebrow">Launching November 2026</div>
-      <h1>Your trusted partner for <em>every online need</em></h1>
-      <p class="hero-sub">From website creation and company registration to government processes — Netmebro handles it all, while a share of every sale goes toward education, knowledge, and a sustainable future.</p>
-      <div class="hero-actions">
-        <a href="#services" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          Explore Services
+    <div>
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        <span class="badge-text">Launching November 2026</span>
+      </div>
+      <h1 class="hero-h">
+        The future of services is <span class="ai-w">AI&#8209;powered</span> and <span class="hu-w">human&#8209;backed</span>
+      </h1>
+      <p class="hero-desc">One unified platform across every service sector — where AI does the heavy lifting, real people ensure it's done right, and every transaction helps a community grow.</p>
+      <div class="hero-acts">
+        <a href="#sectors" class="btn-p">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7.5h9M7.5 3.5l4 4-4 4"/>
+          </svg>
+          Explore the Platform
         </a>
-        <a href="#mission" class="btn-ghost">
-          Our Mission
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M7 3l4 4-4 4"/></svg>
-        </a>
+        <a href="#mission" class="btn-o">Our Mission</a>
       </div>
     </div>
-    <div class="hero-visual" aria-hidden="true">
-      <div class="hero-card-stack">
-        <div class="h-card h-card-1">
-          <div class="h-card-label">Service</div>
-          <div class="h-card-title">Company Registration</div>
-          <span class="h-card-chip">Simplified</span>
+    <div class="hero-canvas-wrap" aria-hidden="true">
+      <canvas id="hero-canvas"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="wrap">
+    <div class="stats-row">
+      <div class="stat-block">
+        <div class="stat-num" style="color:var(--ai)">10+</div>
+        <div class="stat-cap">Service Sectors</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" style="color:var(--impact)">15%</div>
+        <div class="stat-cap">Revenue to Social Impact</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" style="color:var(--human)">AI+H</div>
+        <div class="stat-cap">Hybrid Intelligence</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">∞</div>
+        <div class="stat-cap">We Grow Together</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VISION -->
+<section class="vision" id="vision">
+  <div class="wrap vision-inner">
+    <div class="fu">
+      <p class="eyebrow" style="color:var(--ai)">The Platform Idea</p>
+      <p class="vision-ql">Every service sector, <span class="ai-w">unified</span> — with AI doing the heavy lifting and humans ensuring it's <span class="hu-w">done right</span>.</p>
+      <p style="font-size:1rem;line-height:1.75;color:var(--fg-mid);max-width:440px">From filing your taxes to launching a company, from building a website to accessing government schemes — Netmebro connects the need with the right solution, every time.</p>
+      <div class="chips">
+        <span class="chip ai">AI-Powered</span>
+        <span class="chip hu">Human-Reviewed</span>
+        <span class="chip im">Education Fund</span>
+        <span class="chip">Chat · Voice · Call</span>
+        <span class="chip">Employment First</span>
+        <span class="chip">Community Growth</span>
+      </div>
+    </div>
+    <div class="v-feats fu">
+      <div class="v-feat">
+        <div class="v-ico ai">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="7"/><path d="M6 9l2 2 4-4"/></svg>
         </div>
-        <div class="h-card h-card-2">
-          <div class="h-card-label">Impact Donated</div>
-          <div class="h-card-amt">₹2,400</div>
-          <span class="h-card-chip h-card-chip-warm">To Education</span>
+        <div>
+          <div class="v-ft">Unified Service Layer</div>
+          <p class="v-fd">Government forms, business setup, websites, legal, finance — one platform, one request, handled end-to-end.</p>
         </div>
-        <div class="h-card h-card-3">
-          <div class="h-card-label">Website</div>
-          <div class="h-card-title">Built & Live</div>
-          <span class="h-card-chip">✓ Done</span>
+      </div>
+      <div class="v-feat">
+        <div class="v-ico hu">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15v-1a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v1"/><circle cx="8.5" cy="7" r="3"/><path d="M15 8v6M12 11h6"/></svg>
+        </div>
+        <div>
+          <div class="v-ft">Employment as Infrastructure</div>
+          <p class="v-fd">AI handles routine work; humans review and ensure quality. Every service creates real jobs for real people.</p>
+        </div>
+      </div>
+      <div class="v-feat">
+        <div class="v-ico im">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1l2 5.5H17l-4.5 3.3 1.7 5.2L9 11.7l-5.2 3.3 1.7-5.2L1 6.5h6z"/></svg>
+        </div>
+        <div>
+          <div class="v-ft">Built-in Social Impact</div>
+          <p class="v-fd">15% of every transaction automatically funds education, food programs, and community uplift — no opt-in required.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats-bar">
+<!-- SECTORS -->
+<section class="sectors" id="sectors">
   <div class="wrap">
-    <div class="stats-row">
-      <div class="stat-item">
-        <div class="stat-num">10+</div>
-        <div class="stat-label">Service Categories</div>
+    <div class="sectors-head fu">
+      <p class="eyebrow" style="color:var(--ai)">Every Sector, One Platform</p>
+      <h2 class="sec-h">Where do you need help today?</h2>
+      <p class="sec-sub">Netmebro unifies services across every dimension of life and business — powered by AI, confirmed by humans.</p>
+    </div>
+    <div class="sect-grid fu">
+      <div class="sect-cell">
+        <svg class="sect-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+        <div class="sect-name">Website & Tech</div>
+        <div class="sect-desc">Design, build, and deploy your web presence. E-commerce, portfolios, business sites.</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num">15%</div>
-        <div class="stat-label">Revenue to Social Impact</div>
+      <div class="sect-cell">
+        <svg class="sect-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6M9 16h6M5 8h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <div class="sect-name">Business Setup</div>
+        <div class="sect-desc">Pvt Ltd, LLP, OPC registration — MCA, ROC, GST filings handled end-to-end.</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num">Nov</div>
-        <div class="stat-label">Launch Month</div>
+      <div class="sect-cell">
+        <svg class="sect-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+        <div class="sect-name">Government Forms</div>
+        <div class="sect-desc">PAN, Aadhaar, ITR, FSSAI, Udyam, licenses — accurate and on time.</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num">∞</div>
-        <div class="stat-label">We Grow Together</div>
+      <div class="sect-cell">
+        <svg class="sect-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <div class="sect-name">Healthcare</div>
+        <div class="sect-desc">Health schemes, insurance forms, medical portals, and government health access.</div>
+      </div>
+      <div class="sect-cell">
+        <svg class="sect-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="sect-name">Legal & Compliance</div>
+        <div class="sect-desc">Contracts, IP registration, compliance filings, and legal documentation simplified.</div>
+      </div>
+      <div class="sect-cell">
+        <svg class="sect-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <div class="sect-name">Digital Presence</div>
+        <div class="sect-desc">Google Business, social setup, email domains, and digital marketing basics.</div>
+      </div>
+      <div class="sect-cell">
+        <svg class="sect-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+        <div class="sect-name">Domain & Hosting</div>
+        <div class="sect-desc">Buy, manage, and secure domains and hosting with SSL and DNS handled.</div>
+      </div>
+      <div class="sect-cell">
+        <svg class="sect-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <div class="sect-name">Finance & Tax</div>
+        <div class="sect-desc">ITR, GST returns, accounting, invoicing, and financial compliance made simple.</div>
+      </div>
+      <div class="sect-cell">
+        <svg class="sect-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <div class="sect-name">Education Access</div>
+        <div class="sect-desc">Scholarship applications, certification help, skill programs, and knowledge resources.</div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- SERVICES -->
-<section class="services" id="services">
+<!-- DUALITY -->
+<section class="duality" id="duality">
   <div class="wrap">
-    <div class="services-header">
-      <p class="section-eyebrow">What We Do</p>
-      <h2 class="section-heading">One platform,<br>every online service</h2>
-      <p class="section-sub">Navigating online processes can be overwhelming. We simplify it — so you focus on what matters most.</p>
+    <div class="fu">
+      <p class="eyebrow" style="color:var(--ai)">How We Work</p>
+      <h2 class="sec-h">Not AI <em style="font-style:normal;color:var(--fg-dim)">instead of</em> humans.<br>AI <em style="font-style:normal;color:var(--human)">with</em> humans.</h2>
+      <p class="sec-sub">The future of services isn't about replacing people — it's about pairing intelligent systems with human judgment so every outcome is reliable, fast, and trustworthy.</p>
     </div>
-    <div class="services-grid">
-
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/>
-          </svg>
-        </div>
-        <div class="service-title">Website Creation</div>
-        <p class="service-desc">Professional websites for businesses, freelancers, and individuals — designed, built, and deployed without the jargon.</p>
-        <span class="service-tag">Design · Dev · Hosting</span>
+    <div class="dual-split fu">
+      <div class="dual-side ai-side">
+        <div class="dual-tag ai">Artificial Intelligence</div>
+        <h3 class="dual-h">Fast, consistent, always available</h3>
+        <p class="dual-d">AI processes requests instantly — understanding context, drafting documents, routing to the right service, and answering questions around the clock in chat, voice, and call.</p>
+        <ul class="dual-list">
+          <li>Instant understanding across all sectors</li>
+          <li>Document drafting and form pre-filling</li>
+          <li>Automated routing and submission</li>
+          <li>24/7 availability across all channels</li>
+          <li>Real-time status tracking and updates</li>
+        </ul>
       </div>
-
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 12h6M9 16h6M5 8h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>
-          </svg>
-        </div>
-        <div class="service-title">Company Registration</div>
-        <p class="service-desc">Pvt Ltd, LLP, OPC, or sole proprietorship — we handle the filings, documentation, and follow-ups end to end.</p>
-        <span class="service-tag">MCA · ROC · GST</span>
+      <div class="dual-side hu-side">
+        <div class="dual-tag hu">Human Intelligence</div>
+        <h3 class="dual-h">Verified, trusted, employed</h3>
+        <p class="dual-d">Every critical step passes through trained human reviewers — ensuring accuracy, handling edge cases, and providing the empathy that complex situations genuinely require.</p>
+        <ul class="dual-list">
+          <li>Quality review before any submission</li>
+          <li>Escalation handling for edge cases</li>
+          <li>Real consultations for complex needs</li>
+          <li>Local expertise across every domain</li>
+          <li>Meaningful employment for thousands</li>
+        </ul>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
-          </svg>
+<!-- COMMUNICATION -->
+<section class="comms" id="communication">
+  <div class="wrap">
+    <div class="fu">
+      <p class="eyebrow" style="color:var(--ai)">Communication Platform</p>
+      <h2 class="sec-h">Chat. Voice. Call.<br>Your choice of channel.</h2>
+      <p class="sec-sub">Reach any service through whichever channel feels natural — all of them connect you to both AI and human support in one seamless flow.</p>
+    </div>
+    <div class="comms-grid">
+      <div class="ch-card fu">
+        <div class="ch-ico">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <div class="service-title">Govt. Form Filing</div>
-        <p class="service-desc">PAN, Aadhaar updates, ITR, licenses, and other government forms — submitted accurately and on time.</p>
-        <span class="service-tag">IT · FSSAI · Udyam</span>
+        <div class="ch-name">Chat</div>
+        <p class="ch-desc">Describe your need in plain language. AI understands intent instantly; humans confirm and execute. No jargon, no confusion — just results delivered.</p>
+        <div class="ch-live"><div class="live-dot"></div>AI + Human Live</div>
       </div>
-
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-          </svg>
+      <div class="ch-card fu">
+        <div class="ch-ico">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
         </div>
-        <div class="service-title">Domain & Hosting</div>
-        <p class="service-desc">Buy and manage domain names, set up reliable hosting, and keep your online presence running smoothly.</p>
-        <span class="service-tag">Domains · SSL · DNS</span>
+        <div class="ch-name">Voice</div>
+        <p class="ch-desc">Speak naturally and our voice AI captures your request in full. Ideal for people who prefer talking over typing — fully multilingual and accessible.</p>
+        <div class="ch-live"><div class="live-dot"></div>Multilingual Support</div>
       </div>
-
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
-          </svg>
+      <div class="ch-card fu">
+        <div class="ch-ico">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </div>
-        <div class="service-title">Digital Presence</div>
-        <p class="service-desc">Social media setup, Google My Business, email creation — get your brand visible where your customers are.</p>
-        <span class="service-tag">GMB · Social · Email</span>
+        <div class="ch-name">Call</div>
+        <p class="ch-desc">For complex needs, connect directly with a trained specialist. AI prepares the full context; the human delivers a solution that is fast, informed, and personal.</p>
+        <div class="ch-live"><div class="live-dot"></div>Human Specialist</div>
       </div>
-
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
-        </div>
-        <div class="service-title">End-to-End Assistance</div>
-        <p class="service-desc">Not sure what you need? Talk to us. We'll understand your situation and guide you to the right solution, step by step.</p>
-        <span class="service-tag">Consultation · Support</span>
-      </div>
-
     </div>
   </div>
 </section>
@@ -1139,210 +692,96 @@ footer {
 <!-- IMPACT -->
 <section class="impact" id="impact">
   <div class="wrap impact-inner">
-    <div>
-      <p class="section-eyebrow">Social Impact</p>
-      <h2 class="section-heading">Every service you use helps someone grow</h2>
-      <p class="section-sub" style="margin-bottom:28px">A meaningful percentage of every transaction goes directly into programs that uplift communities — education, knowledge access, and sustainable living.</p>
-      <div class="mission-pillars" style="margin-top:0">
-        <span class="pillar-chip" style="background:var(--accent-pale);color:var(--accent);border-color:var(--accent-pale);">Education Access</span>
-        <span class="pillar-chip" style="background:var(--accent-pale);color:var(--accent);border-color:var(--accent-pale);">Knowledge Sharing</span>
-        <span class="pillar-chip" style="background:var(--accent-pale);color:var(--accent);border-color:var(--accent-pale);">Sustainable Environment</span>
-        <span class="pillar-chip" style="background:var(--accent-pale);color:var(--accent);border-color:var(--accent-pale);">Community Uplift</span>
-      </div>
-    </div>
-    <div class="impact-visual">
-      <div class="impact-ring-label">
-        <strong>How Your Payment Flows</strong>
-        <p>Every rupee you spend creates two outcomes</p>
-      </div>
-      <div class="donut-wrap">
-        <svg width="160" height="160" viewBox="0 0 160 160" role="img" aria-label="Revenue split donut chart">
-          <circle cx="80" cy="80" r="60" fill="none" stroke="var(--border)" stroke-width="22"/>
-          <!-- 85% service — stroke-dasharray = 2πr * 0.85 ≈ 320.4 -->
-          <circle cx="80" cy="80" r="60" fill="none" stroke="var(--accent)" stroke-width="22"
-            stroke-dasharray="320.4 376.99" stroke-dashoffset="94.25" stroke-linecap="round" transform="rotate(-90 80 80)"/>
-          <!-- 15% impact — stroke-dasharray = 2πr * 0.15 ≈ 56.5 -->
-          <circle cx="80" cy="80" r="60" fill="none" stroke="var(--accent-warm)" stroke-width="22"
-            stroke-dasharray="56.5 376.99" stroke-dashoffset="-226.15" stroke-linecap="round" transform="rotate(-90 80 80)"/>
-          <text x="80" y="74" text-anchor="middle" font-family="'Playfair Display',serif" font-size="22" font-weight="700" fill="var(--fg)">15%</text>
-          <text x="80" y="94" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" fill="var(--fg-muted)">to Impact</text>
-        </svg>
-      </div>
-      <div class="impact-legend">
-        <div class="legend-row">
-          <div class="legend-left">
-            <div class="legend-dot" style="background:var(--accent)"></div>
-            Service & Operations
-          </div>
-          <span class="legend-pct">85%</span>
+    <div class="fu">
+      <p class="eyebrow" style="color:var(--impact)">Social Impact</p>
+      <div class="big-pct">15%</div>
+      <p style="font-size:1rem;line-height:1.75;color:var(--fg-mid);max-width:380px;margin-top:12px">of every rupee spent on Netmebro flows automatically into programs that change lives — no separate donation, no opt-in.</p>
+      <div class="streams">
+        <div class="stream">
+          <div class="s-label">Education</div>
+          <div class="s-bar"><div class="s-fill" style="width:50%;background:var(--ai)"></div></div>
+          <div class="s-pct" style="color:var(--ai)">50%</div>
         </div>
-        <div class="legend-row">
-          <div class="legend-left">
-            <div class="legend-dot" style="background:var(--accent-warm)"></div>
-            Social Impact Fund
-          </div>
-          <span class="legend-pct">15%</span>
+        <div class="stream">
+          <div class="s-label">Food & Nutrition</div>
+          <div class="s-bar"><div class="s-fill" style="width:25%;background:var(--impact)"></div></div>
+          <div class="s-pct" style="color:var(--impact)">25%</div>
+        </div>
+        <div class="stream">
+          <div class="s-label">Environment</div>
+          <div class="s-bar"><div class="s-fill" style="width:15%;background:#22C55E"></div></div>
+          <div class="s-pct" style="color:#22C55E">15%</div>
+        </div>
+        <div class="stream">
+          <div class="s-label">Knowledge</div>
+          <div class="s-bar"><div class="s-fill" style="width:10%;background:var(--human)"></div></div>
+          <div class="s-pct" style="color:var(--human)">10%</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how" id="how">
-  <div class="wrap">
-    <p class="section-eyebrow">How It Works</p>
-    <h2 class="section-heading">Simple, transparent, done.</h2>
-    <div class="how-steps">
-      <div class="how-step">
-        <div class="step-icon">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
-        </div>
-        <div class="step-title">Tell us what you need</div>
-        <p class="step-desc">Reach out via our platform or email. We ask a few quick questions to understand exactly what you're looking for.</p>
-      </div>
-      <div class="how-step">
-        <div class="step-icon">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-          </svg>
-        </div>
-        <div class="step-title">We build a clear plan</div>
-        <p class="step-desc">You get a transparent breakdown — what will be done, how long it takes, what it costs. No hidden fees.</p>
-      </div>
-      <div class="how-step">
-        <div class="step-icon">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-        </div>
-        <div class="step-title">We handle the hard parts</div>
-        <p class="step-desc">Our team takes care of the process — filings, logins, follow-ups — so you don't have to navigate it alone.</p>
-      </div>
-      <div class="how-step">
-        <div class="step-icon">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="10"/><path d="M11 6v5l3 3"/>
-          </svg>
-        </div>
-        <div class="step-title">Delivered, with impact</div>
-        <p class="step-desc">Your service is complete. A portion of your payment automatically goes toward community impact programs.</p>
-      </div>
+    <div class="fu">
+      <h2 class="sec-h" style="margin-bottom:20px">Every service you use helps someone grow.</h2>
+      <p style="font-size:1rem;line-height:1.75;color:var(--fg-mid);margin-bottom:20px">Netmebro is built on the idea that commercial success and social good are the same thing done right.</p>
+      <p style="font-size:1rem;line-height:1.75;color:var(--fg-mid)">When you register your company through us, a student gets a scholarship. When your website goes live, a family receives food support. The service creates value, and the value flows back into the communities we all come from.</p>
     </div>
   </div>
 </section>
 
 <!-- MISSION -->
 <section class="mission" id="mission">
-  <svg class="mission-bg" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="700" cy="100" r="300" fill="#3B6FD4" opacity="0.18"/>
-    <circle cx="100" cy="400" r="200" fill="#5B8FF0" opacity="0.1"/>
-  </svg>
   <div class="wrap">
-    <div class="mission-inner">
-      <p class="section-eyebrow">Our Belief</p>
-      <h2 class="section-heading" style="color:#fff">We grow together.</h2>
-      <blockquote class="mission-quote">
-        "Business should leave the world better than it found it — not as charity, but as the natural result of doing good work."
-      </blockquote>
-      <p style="color:rgba(255,255,255,0.65);font-size:1rem;line-height:1.7;margin-bottom:32px">
-        Netmebro was born from a simple idea: that every small business owner, freelancer, or individual deserves professional help navigating the internet — without confusion, without exploitation, and without being left behind. When you grow, we donate a part of that growth to education, knowledge, and a healthier planet. Because the communities we serve are the communities we come from.
-      </p>
-      <div class="mission-pillars">
-        <span class="pillar-chip">Education</span>
-        <span class="pillar-chip">Knowledge Access</span>
-        <span class="pillar-chip">Sustainable Future</span>
-        <span class="pillar-chip">Community First</span>
-        <span class="pillar-chip">We Grow Together</span>
+    <div class="mission-inner fu">
+      <p class="eyebrow" style="color:var(--ai)">Our Belief</p>
+      <h2 class="mission-stmt">
+        We are building the <span class="ai-w">unified service infrastructure</span> for a society that grows <span class="hu-w">together</span> — where technology creates opportunity, not division.
+      </h2>
+      <p style="font-size:1rem;line-height:1.8;color:var(--fg-mid);max-width:640px;margin-bottom:20px">Navigating the internet to get things done is still impossibly hard for most people. Businesses struggle. Individuals get lost. Government processes are opaque. And when AI tries to help alone, there is no one accountable behind it.</p>
+      <p style="font-size:1rem;line-height:1.8;color:var(--fg-mid);max-width:640px">We fix all of that — AI that does the work, humans who stand behind it, and a model where every transaction makes someone's life a little better. That is the future we are building.</p>
+      <div class="chips" style="margin-top:32px">
+        <span class="chip ai">AI Infrastructure</span>
+        <span class="chip hu">Human Employment</span>
+        <span class="chip im">Education Fund</span>
+        <span class="chip">Food Support</span>
+        <span class="chip">Environment</span>
+        <span class="chip">Connected Communities</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LAUNCH -->
-<section class="launch" id="launch">
-  <div class="wrap launch-inner">
-    <div>
-      <div class="launch-badge">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M7 1l1.5 4.5H13l-3.75 2.75L10.5 13 7 10.25 3.5 13l1.25-4.75L1 5.5h4.5z"/>
-        </svg>
-        Coming November 2026
-      </div>
-      <h2 class="section-heading">Be the first to know</h2>
-      <p class="section-sub">We're launching soon. Drop your email and we'll let you know the moment Netmebro goes live. No spam, just the announcement.</p>
+<!-- NOTIFY -->
+<section class="notify" id="notify">
+  <div class="wrap notify-inner">
+    <div class="fu">
+      <p class="eyebrow" style="color:var(--impact)">Coming November 2026</p>
+      <h2 class="sec-h">Be first inside.</h2>
+      <p class="sec-sub">We're building something new. Drop your email and we'll reach out the moment Netmebro goes live.</p>
     </div>
-    <div>
-      <form class="notify-form" id="notify-form">
-        <input type="text" class="notify-field" placeholder="Your name" id="notify-name" autocomplete="name" required>
-        <input type="email" class="notify-field" placeholder="Your email address" id="notify-email" autocomplete="email" required>
-        <button type="submit" class="btn-primary" style="align-self:flex-start">
+    <div class="fu">
+      <form class="nf-wrap" id="nf">
+        <input type="text" class="field" id="n-name" placeholder="Your name" autocomplete="name" required>
+        <input type="email" class="field" id="n-email" placeholder="Email address" autocomplete="email" required>
+        <button type="submit" class="btn-p" style="align-self:flex-start;margin-top:4px">
           Notify Me at Launch
         </button>
-        <p class="notify-note">We respect your privacy. Unsubscribe any time.</p>
+        <p class="nf-note">No spam. Just the announcement when we go live.</p>
       </form>
-      <div class="form-success" id="form-success">
-        ✓ You're on the list! We'll reach out when Netmebro launches.
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTRIBUTE -->
-<section class="contribute" id="contribute">
-  <div class="wrap">
-    <p class="section-eyebrow">Join The Team</p>
-    <h2 class="section-heading">Help us build something meaningful</h2>
-    <p class="section-sub">Netmebro is a startup with a mission. We're looking for people who believe in using technology to empower communities — developers, contributors, and collaborators.</p>
-    <div class="contribute-cards">
-      <div class="contribute-card">
-        <div class="cc-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-          </svg>
-        </div>
-        <div class="cc-title">Developers & Builders</div>
-        <p class="cc-desc">We need passionate developers — frontend, backend, full-stack — who want to build a product that has real social impact alongside its commercial goals.</p>
-        <div class="cc-email">admin@netmebro.in</div>
-        <button class="copy-btn" data-copy="admin@netmebro.in" id="copy-dev">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4" y="4" width="8" height="8" rx="1.5"/><path d="M9 4V2.5A1.5 1.5 0 0 0 7.5 1H2.5A1.5 1.5 0 0 0 1 2.5v5A1.5 1.5 0 0 0 2.5 9H4"/>
-          </svg>
-          <span>Copy email</span>
-        </button>
-      </div>
-      <div class="contribute-card">
-        <div class="cc-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-        </div>
-        <div class="cc-title">Contributors & Collaborators</div>
-        <p class="cc-desc">Content writers, designers, domain experts in legal, finance, or government processes — if you believe in what we're building, we'd love to hear from you.</p>
-        <div class="cc-email">admin@netmebro.in</div>
-        <button class="copy-btn" data-copy="admin@netmebro.in" id="copy-contrib">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4" y="4" width="8" height="8" rx="1.5"/><path d="M9 4V2.5A1.5 1.5 0 0 0 7.5 1H2.5A1.5 1.5 0 0 0 1 2.5v5A1.5 1.5 0 0 0 2.5 9H4"/>
-          </svg>
-          <span>Copy email</span>
-        </button>
-      </div>
+      <div class="form-ok" id="fok">✓ You're on the list. We'll reach out when Netmebro launches.</div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="wrap footer-inner">
+  <div class="wrap foot-inner">
     <div>
-      <div class="footer-brand">netme<span>bro</span></div>
-      <div class="footer-note" style="margin-top:6px">admin@netmebro.in &nbsp;·&nbsp; Launching November 2026</div>
+      <div class="foot-brand">netme<em>bro</em></div>
+      <div class="foot-note">admin@netmebro.in &nbsp;·&nbsp; Launching November 2026</div>
     </div>
-    <span class="tagline-footer">We Grow Together</span>
-    <ul class="footer-links">
-      <li><a href="#services">Services</a></li>
+    <span class="foot-tag">We Grow Together</span>
+    <ul class="foot-links">
+      <li><a href="#sectors">Services</a></li>
+      <li><a href="#duality">AI + Human</a></li>
       <li><a href="#impact">Impact</a></li>
       <li><a href="#mission">Mission</a></li>
       <li><a href="mailto:admin@netmebro.in">Contact</a></li>
@@ -1351,79 +790,204 @@ footer {
 </footer>
 
 <script>
-  // Nav sticky shadow
-  const nav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 10);
-  }, { passive: true });
+// Nav scroll shadow
+const navEl = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  navEl.classList.toggle('scrolled', window.scrollY > 16);
+}, { passive: true });
 
-  // Mobile nav toggle
-  const toggle = document.getElementById('nav-toggle');
-  const links = document.getElementById('nav-links');
-  toggle.addEventListener('click', () => {
-    links.classList.toggle('open');
-    const open = links.classList.contains('open');
-    toggle.setAttribute('aria-expanded', open);
-  });
+// Mobile nav
+const nt = document.getElementById('nt');
+const nl = document.getElementById('nl');
+nt.addEventListener('click', () => {
+  nl.classList.toggle('open');
+  nt.setAttribute('aria-expanded', nl.classList.contains('open'));
+});
+nl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nl.classList.remove('open')));
 
-  // Close mobile nav on link click
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => links.classList.remove('open'));
-  });
+// Notify form
+document.getElementById('nf').addEventListener('submit', e => {
+  e.preventDefault();
+  document.getElementById('nf').style.display = 'none';
+  document.getElementById('fok').style.display = 'block';
+});
 
-  // Copy email buttons
-  document.querySelectorAll('.copy-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const text = btn.dataset.copy;
-      const span = btn.querySelector('span');
-      navigator.clipboard.writeText(text).then(() => {
-        span.textContent = 'Copied!';
-        btn.classList.add('copied');
-        setTimeout(() => { span.textContent = 'Copy email'; btn.classList.remove('copied'); }, 2000);
-      }).catch(() => {
-        // Fallback: select the email element
-        const emailEl = btn.previousElementSibling;
-        const range = document.createRange();
-        range.selectNodeContents(emailEl);
-        const sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-        span.textContent = 'Selected!';
-        setTimeout(() => { span.textContent = 'Copy email'; sel.removeAllRanges(); }, 2000);
-      });
-    });
-  });
-
-  // Notify form
-  document.getElementById('notify-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const success = document.getElementById('form-success');
-    form.style.display = 'none';
-    success.style.display = 'block';
-  });
-
-  // Smooth entrance for service cards
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        observer.unobserve(entry.target);
+// Fade-up on scroll
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('vis');
+        obs.unobserve(en.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+}
 
-  const initCards = () => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    document.querySelectorAll('.service-card, .how-step, .contribute-card').forEach((el, i) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(18px)';
-      el.style.transition = `opacity 0.45s ease ${i * 0.06}s, transform 0.45s ease ${i * 0.06}s`;
-      observer.observe(el);
+// ── HERO CANVAS — platform network visualization ──
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let raf, t = 0, dims;
+
+  const sectors = ['Business','Tax','Legal','Health','Web','Govt','Finance','Digital','Education','Domain'];
+
+  function resize() {
+    const wrap = canvas.parentElement;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = Math.min(wrap.offsetWidth, 460);
+    const h = w;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+    dims = { w, h };
+  }
+
+  let nodes = [];
+
+  function buildNodes(w, h) {
+    const cx = w / 2, cy = h / 2;
+    nodes = [{ x: cx, y: cy, r: 22, center: true, pulse: 0 }];
+    const ir = w * 0.24, or = w * 0.40;
+    for (let i = 0; i < 5; i++) {
+      const a = (i / 5) * Math.PI * 2 - Math.PI / 2;
+      nodes.push({ x: cx + Math.cos(a) * ir, y: cy + Math.sin(a) * ir, r: 13, label: sectors[i], a, ir, speed: 0.003 + i * 0.0004, pulse: Math.random() * Math.PI * 2, ring: 0, cx, cy });
+    }
+    for (let i = 0; i < 5; i++) {
+      const a = ((i + 0.5) / 5) * Math.PI * 2 - Math.PI / 2;
+      nodes.push({ x: cx + Math.cos(a) * or, y: cy + Math.sin(a) * or, r: 9, label: sectors[i + 5], a, ir: or, speed: 0.0018 + i * 0.0003, pulse: Math.random() * Math.PI * 2, ring: 1, cx, cy });
+    }
+  }
+
+  function isDark() {
+    const th = document.documentElement.getAttribute('data-theme');
+    return th === 'dark' || (!th && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }
+
+  function draw() {
+    t += 0.01;
+    const { w, h } = dims;
+    const cx = w / 2, cy = h / 2;
+    ctx.clearRect(0, 0, w, h);
+
+    const dark = isDark();
+    const aiC = dark ? '#2B7FFF' : '#1A6AFF';
+    const huC = dark ? '#9B5CF6' : '#7C3AED';
+    const bgC = dark ? '#0D1529' : '#EEF2FF';
+    const fgC = dark ? '#EEF2FF' : '#050A1A';
+    const fgD = dark ? '#3A4F78' : '#8A9CC4';
+    const bdr = dark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)';
+
+    // Update positions
+    for (let i = 1; i < nodes.length; i++) {
+      const n = nodes[i];
+      n.a += n.speed;
+      n.x = n.cx + Math.cos(n.a) * n.ir;
+      n.y = n.cy + Math.sin(n.a) * n.ir;
+    }
+
+    // Orbit rings
+    [nodes[1].ir, nodes[6].ir].forEach(r => {
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.strokeStyle = bdr;
+      ctx.lineWidth = 1;
+      ctx.stroke();
     });
-  };
-  initCards();
+
+    // Lines: center to inner
+    for (let i = 1; i <= 5; i++) {
+      const n = nodes[i];
+      const g = ctx.createLinearGradient(cx, cy, n.x, n.y);
+      g.addColorStop(0, dark ? 'rgba(43,127,255,0.55)' : 'rgba(26,106,255,0.45)');
+      g.addColorStop(1, dark ? 'rgba(43,127,255,0.04)' : 'rgba(26,106,255,0.03)');
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(n.x, n.y);
+      ctx.strokeStyle = g; ctx.lineWidth = 1.5; ctx.stroke();
+    }
+
+    // Lines: inner to outer
+    for (let i = 6; i < nodes.length; i++) {
+      const outer = nodes[i];
+      let best = nodes[1], bd = Infinity;
+      for (let j = 1; j <= 5; j++) {
+        const d = Math.hypot(nodes[j].x - outer.x, nodes[j].y - outer.y);
+        if (d < bd) { bd = d; best = nodes[j]; }
+      }
+      ctx.beginPath(); ctx.moveTo(best.x, best.y); ctx.lineTo(outer.x, outer.y);
+      ctx.strokeStyle = dark ? 'rgba(155,92,246,0.18)' : 'rgba(124,58,237,0.14)';
+      ctx.lineWidth = 1; ctx.stroke();
+    }
+
+    // Nodes
+    nodes.forEach(n => {
+      const pm = Math.sin(t * 2 + n.pulse) * 0.5 + 0.5;
+
+      if (n.center) {
+        // Glow
+        const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 2.8);
+        grd.addColorStop(0, dark ? 'rgba(43,127,255,0.4)' : 'rgba(26,106,255,0.3)');
+        grd.addColorStop(1, 'transparent');
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r * 2.8, 0, Math.PI * 2);
+        ctx.fillStyle = grd; ctx.fill();
+
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = aiC; ctx.fill();
+
+        ctx.font = 'bold 7.5px "Space Grotesk", sans-serif';
+        ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('NMB', n.x, n.y);
+
+      } else if (n.ring === 0) {
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r + pm * 2, 0, Math.PI * 2);
+        ctx.fillStyle = dark ? 'rgba(43,127,255,0.08)' : 'rgba(26,106,255,0.06)';
+        ctx.fill();
+
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = bgC; ctx.fill();
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${dark ? '43,127,255' : '26,106,255'},${0.4 + pm * 0.4})`;
+        ctx.lineWidth = 1.5; ctx.stroke();
+
+        ctx.font = '6px "Inter", sans-serif';
+        ctx.fillStyle = fgC; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(n.label, n.x, n.y);
+
+      } else {
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = bgC; ctx.fill();
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${dark ? '155,92,246' : '124,58,237'},${0.3 + pm * 0.3})`;
+        ctx.lineWidth = 1; ctx.stroke();
+
+        ctx.font = '5.5px "Inter", sans-serif';
+        ctx.fillStyle = fgD; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(n.label, n.x, n.y);
+      }
+    });
+
+    raf = requestAnimationFrame(draw);
+  }
+
+  resize();
+  buildNodes(dims.w, dims.h);
+  draw();
+
+  let resizeTO;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTO);
+    resizeTO = setTimeout(() => {
+      cancelAnimationFrame(raf);
+      resize();
+      buildNodes(dims.w, dims.h);
+      draw();
+    }, 120);
+  });
+})();
 </script>
 
 </body></html>
